@@ -31,3 +31,4 @@ func render(in map[string]int, dataType string, all int) {
 	t.SetStyle(table.StyleLight)
 	t.Render()
 }
+
