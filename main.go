@@ -3,9 +3,10 @@ package main
 import (
 	"flag"
 	"fmt"
-	"log"
 	"os"
 )
+
+const MaxLen = 50
 
 type Args struct {
 	useGit    bool
@@ -45,13 +46,14 @@ func main() {
 		fileCount: make(map[string]int),
 	}
 	if len(os.Args) < 2 {
-		log.Fatalln("输入文件夹参数！")
+		fmt.Println("请输入文件夹")
+		return
 	}
 	if !IsDir(rootDir) {
-		log.Fatalln("找不到该文件夹！")
+		fmt.Println("找不到该文件夹！")
+		return
 	}
-	fmt.Println(count.countDir(rootDir))
-	fmt.Println(count.mainCount)
-	fmt.Println(count.fileCount)
-
+	all := count.countDir(rootDir)
+	render(count.mainCount, "文件类型", all)
+	render(count.fileCount, "文件名", all)
 }
