@@ -1,1 +1,3 @@
 .idea/
+codeLine*
+*.tar.gz
