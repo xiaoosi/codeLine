@@ -21,7 +21,7 @@ func parseArgs() {
 	flag.BoolVar(&args.useGit, "useGit", false, "是否使用gitignore规则")
 	flag.StringVar(&args.allowStr, "allowExt", "*", `允许的文件后缀名，存在多个时请使用""包裹。如："py go js" 默认全匹配`)
 	flag.StringVar(&args.ignoreStr, "ignoreExt", "", `忽略的文件后缀名，存在多个时请使用""包裹。如："py go js" 默认不忽略`)
-	flag.StringVar(&args.ignoreDir, "ignoreDir", "", `允许的文件夹名，存在多个时请使用""包裹。如："node_modules" 默认不忽略`)
+	flag.StringVar(&args.ignoreDir, "ignoreDir", "", `忽略的文件夹名，存在多个时请使用""包裹。如："node_modules" 默认不忽略`)
 	flag.Parse()
 }
 
