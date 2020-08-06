@@ -39,7 +39,7 @@ func main() {
 			IgnoreDir: parseStringToMylist(args.ignoreDir),
 		}
 	}
-	rule.init()
+	rule.init(rootDir)
 	count := Count{
 		rule:      rule,
 		mainCount: make(map[string]int),

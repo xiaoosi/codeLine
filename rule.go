@@ -20,7 +20,7 @@ func (ml myList) has(s string) bool {
 }
 
 type Rule interface {
-	init()
+	init(rootPath string)
 	isFilePass(path string, file os.FileInfo) bool
 	isDirPass(pathName string) bool
 }
@@ -30,10 +30,11 @@ type samRule struct {
 	AllowExt  myList
 	IgnoreExt myList
 	IgnoreDir myList
+	rootPath  string
 }
 
-func (r *samRule) init() {
-
+func (r *samRule) init(rootPath string) {
+	r.rootPath = rootPath
 }
 
 func getExt(file os.FileInfo) string {
@@ -79,10 +80,15 @@ func parseStringToMylist(str string) myList {
 
 // gitignore Role
 type gitRule struct {
-	paths myList
+	paths    myList
+	rootPath string
 }
 
-func (r *gitRule) init() {
+func (r *gitRule) init(rootPath string) {
+	if !strings.HasSuffix(rootPath, "/"){
+		rootPath += "/"
+	}
+	r.rootPath = rootPath
 	cmd := exec.Command("git", "version")
 	strBytes, err := cmd.Output()
 	if err != nil {
@@ -92,7 +98,7 @@ func (r *gitRule) init() {
 	if strings.Trim(str, "\n ") == "" {
 		log.Fatalf("err: %s\ncon't find git in your os")
 	}
-	cmd = exec.Command("git", "ls-files")
+	cmd = exec.Command("git", "--git-dir="+rootPath+".git", "ls-files")
 	strBytes, err = cmd.Output()
 	if err != nil {
 		log.Fatalf("err: %s\nPlease make sure git is initialized\ntry run `git init && git add .`", err.Error())
@@ -102,7 +108,11 @@ func (r *gitRule) init() {
 	if len(fileList) > 0 {
 		fileList = fileList[:len(fileList)-1]
 	}
-	r.paths = fileList
+	newFileList := make([]string, 0)
+	for _, fileStr := range fileList {
+		newFileList = append(newFileList, filepath.Join(rootPath, fileStr))
+	}
+	r.paths = newFileList
 }
 
 func (r *gitRule) isFilePass(path string, file os.FileInfo) bool {
