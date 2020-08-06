@@ -24,6 +24,8 @@ type Rule interface {
 	isFilePass(path string, file os.FileInfo) bool
 	isDirPass(pathName string) bool
 }
+
+// sample Rule
 type samRule struct {
 	AllowExt  myList
 	IgnoreExt myList
@@ -61,6 +63,21 @@ func (r *samRule) isDirPass(pathName string) bool {
 	return true
 }
 
+func parseStringToMylist(str string) myList {
+	if str == "" {
+		return myList{}
+	}
+	res := myList{}
+	items := strings.Split(str, " ")
+	for _, item := range items {
+		if item != "" {
+			res = append(res, item)
+		}
+	}
+	return res
+}
+
+// gitignore Role
 type gitRule struct {
 	paths myList
 }
@@ -90,7 +107,7 @@ func (r *gitRule) init() {
 
 func (r *gitRule) isFilePass(path string, file os.FileInfo) bool {
 	fullPath := filepath.Join(path, file.Name())
-	if r.paths.has(fullPath){
+	if r.paths.has(fullPath) {
 		return true
 	}
 	return false
