@@ -47,7 +47,7 @@ Usage of codeLine:
   -allowExt string
         允许的文件后缀名，存在多个时请使用""包裹。如："py go js" 默认全匹配 (default "*")
   -ignoreDir string
-        允许的文件夹名，存在多个时请使用""包裹。如："node_modules" 默认不忽略
+        忽略的文件夹名，存在多个时请使用""包裹。如："node_modules" 默认不忽略
   -ignoreExt string
         忽略的文件后缀名，存在多个时请使用""包裹。如："py go js" 默认不忽略
   -useGit
