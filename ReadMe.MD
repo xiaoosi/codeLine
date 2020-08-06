@@ -1,14 +1,16 @@
 # CodeLine 
 一个代码行统计小工具
 * 支持自定义规则
-* .gitignore
+* 支持.gitignore过滤规则
 
 ### 下载
-
+[release1.0](https://github.com/xiaoosi/codeLine/releases/tag/v1.0)
 ### 使用
 基础用法
-```
+```bash
 codeLine --useGit .
+```
+```
 ┌───────────┬───────┬────────────┐
 │ FILE TYPE │ LINES │ PROPORTION │
 ├───────────┼───────┼────────────┤
@@ -37,6 +39,8 @@ codeLine --useGit .
 └────────────┴───────┴────────────┘
 
 ```
+
+
 ### 参数
 ```
 Usage of codeLine:
