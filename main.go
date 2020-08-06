@@ -54,6 +54,6 @@ func main() {
 		return
 	}
 	all := count.countDir(rootDir)
-	render(count.mainCount, "文件类型", all)
-	render(count.fileCount, "文件名", all)
+	render(count.mainCount, "file type", all)
+	render(count.fileCount, "file path", all)
 }

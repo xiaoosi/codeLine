@@ -25,9 +25,9 @@ func convMap(strMap map[string]int, all int) []table.Row {
 func render(in map[string]int, dataType string, all int) {
 	t := table.NewWriter()
 	t.SetOutputMirror(os.Stdout)
-	t.AppendHeader(table.Row{dataType, "行数", "占比"})
+	t.AppendHeader(table.Row{dataType, "lines", "proportion"})
 	t.AppendRows(convMap(in, all))
-	t.AppendFooter(table.Row{"总行数", all})
+	t.AppendFooter(table.Row{"all", all})
 	t.SetStyle(table.StyleLight)
 	t.Render()
 }
