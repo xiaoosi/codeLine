@@ -1,5 +1,6 @@
 # CodeLine 
 一个代码行统计小工具
+* 提供release版本，下载即可使用
 * 支持自定义规则
 * 支持.gitignore过滤规则
 
